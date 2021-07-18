@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import com.example.indo.currentStatus.UserEnteredInsulinDoseDialogfragment;
 import com.example.indo.userInput.UserInputFragment;
 
 public class UserInputDialogFragment extends DialogFragment {
@@ -59,11 +60,12 @@ public class UserInputDialogFragment extends DialogFragment {
                 .setPositiveButton("continue", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        startActivity(intent);
+
                     }
                 })
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+
                         UserInputDialogFragment.this.getDialog().cancel();
                     }
                 });

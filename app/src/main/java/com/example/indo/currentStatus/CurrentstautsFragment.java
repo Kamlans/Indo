@@ -60,6 +60,8 @@ public class CurrentstautsFragment extends Fragment {
                 })
                 .setNegativeButton("don't accept ", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        UserEnteredInsulinDoseDialogfragment us = new UserEnteredInsulinDoseDialogfragment();
+                        us.show(getChildFragmentManager() , null);
                         dialog.cancel();
                     }
                 });

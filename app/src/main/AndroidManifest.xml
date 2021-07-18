@@ -2,18 +2,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.indo">
 
-    <uses-permission android:name="android.permission.MANAGE_OWN_CALLS"/>
-    <uses-permission android:name="android.permission.READ_CALL_LOG"/>
-
-    <!-- Needed only if your calling app reads numbers from the `PHONE_STATE`
+    <uses-permission android:name="android.permission.MANAGE_OWN_CALLS" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <!--
+ Needed only if your calling app reads numbers from the `PHONE_STATE`
          intent action. The maxSdkVersion attribute is needed only if your
-         calling app uses the getLine1Number() or getMsisdn() methods. -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"
-        android:maxSdkVersion="29"/>
-
-    <!-- Needed only if your calling app uses the getLine1Number() or
-         getMsisdn() methods. -->
-    <uses-permission android:name="android.permissions.READ_PHONE_NUMBERS"/>
+         calling app uses the getLine1Number() or getMsisdn() methods.
+    -->
+    <uses-permission
+        android:name="android.permission.READ_PHONE_STATE"
+        android:maxSdkVersion="29" />
+    <!--
+ Needed only if your calling app uses the getLine1Number() or
+         getMsisdn() methods.
+    -->
+    <uses-permission android:name="android.permissions.READ_PHONE_NUMBERS" />
 
     <application
         android:allowBackup="true"
@@ -22,6 +25,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Indo">
+        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".SplashScreenActivity">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

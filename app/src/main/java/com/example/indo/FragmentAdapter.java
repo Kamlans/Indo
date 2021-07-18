@@ -36,4 +36,7 @@ public class FragmentAdapter extends FragmentStateAdapter {
     public int getItemCount() {
         return 4;
     }
+
+    public static class UserEnteredInsulinDoseDialogFragment {
+    }
 }
