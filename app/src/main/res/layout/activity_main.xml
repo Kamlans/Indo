@@ -23,19 +23,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/graphTab"
-            android:text="history" />
+            android:text="past \n status" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/homeTab"
-            android:text="current status" />
+            android:text="current \n status" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/chatTab"
-            android:text="user input" />
+            android:text="user \n  input" />
 
 <!--        <com.google.android.material.tabs.TabItem-->
 <!--            android:layout_width="wrap_content"-->
