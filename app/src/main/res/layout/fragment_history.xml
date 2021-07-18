@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".levels.LevelFragment">
+    tools:context=".history.HistoryFragment">
 
 
     <ScrollView
@@ -22,10 +22,10 @@
                 android:layout_margin="30dp"/>
 
             <com.github.mikephil.charting.charts.LineChart
-                android:layout_width="match_parent"
                 android:id="@+id/insulin_graph"
+                android:layout_width="match_parent"
                 android:layout_height="350dp"
-                android:layout_margin="30dp"/>
+                android:layout_margin="30dp" />
 
             <com.github.mikephil.charting.charts.LineChart
                 android:layout_width="match_parent"

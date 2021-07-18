@@ -5,9 +5,6 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 
-import com.example.indo.chats.ChatFragment;
-import com.example.indo.home.HomeFragment;
-import com.example.indo.levels.LevelFragment;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {

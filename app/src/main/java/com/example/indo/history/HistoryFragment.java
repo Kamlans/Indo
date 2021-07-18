@@ -1,6 +1,5 @@
-package com.example.indo.levels;
+package com.example.indo.history;
 
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -17,15 +16,11 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
-import org.w3c.dom.Entity;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
 
 
-public class LevelFragment extends Fragment {
+public class HistoryFragment extends Fragment {
 
     private static final String TAG = "kamlans" ;
     private LineChart riskIndex, insulin , CHO , BG;
@@ -35,7 +30,7 @@ public class LevelFragment extends Fragment {
     List<Entry> BGList = new ArrayList<>();
 
 
-    public LevelFragment() {
+    public HistoryFragment() {
         // Required empty public constructor
     }
 
@@ -46,7 +41,7 @@ public class LevelFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_level, container, false);
+        View view =  inflater.inflate(R.layout.fragment_history, container, false);
 
         riskIndex = view.findViewById(R.id.riskIndex_graph);
         insulin = view.findViewById(R.id.insulin_graph);
@@ -59,30 +54,28 @@ public class LevelFragment extends Fragment {
             try{
 //                int x = 5;
 
-                int y1 = new Random().nextInt(10);
-                int x1 = new Random().nextInt(10);
-                int y2 = new Random().nextInt(10);
-                int x2 = new Random().nextInt(10);
-                int y3 = new Random().nextInt(10);
-                int x3 = new Random().nextInt(10);
-                int y4 = new Random().nextInt(10);
-                int x4 = new Random().nextInt(10);
-
-//                int  avg1 = 0 , avg2 = 0 , avg3 = 0  , avg4 = 0 ;
+//                int y1 = new Random().nextInt(10);
+//                int x1 = new Random().nextInt(10);
+//                int y2 = new Random().nextInt(10);
+//                int x2 = new Random().nextInt(10);
+//                int y3 = new Random().nextInt(10);
+//                int x3 = new Random().nextInt(10);
+//                int y4 = new Random().nextInt(10);
+//                int x4 = new Random().nextInt(10);
 //
-//                 avg1 = avg1 + y1;
-//                 avg2 = avg2 + y2;
-//                 avg3 = avg3 + y3;
-//                 avg4 = avg4 + y4;
+//
+//
+//                Log.d(TAG, "onCreateView: "+y1 +" "+y2);
+//
+//                riskIndexList.add(new Entry(x1, y1));
+//                insulinList.add(new Entry(x2 , y2));
+//                CHOList.add(new Entry(x3 , y3));
+//                BGList.add(new Entry(x4 , y4));
 
-                Log.d(TAG, "onCreateView: "+y1 +" "+y2);
-
-                riskIndexList.add(new Entry(x1, y1));
-                insulinList.add(new Entry(x2 , y2));
-                CHOList.add(new Entry(x3 , y3));
-                BGList.add(new Entry(x4 , y4));
-
-
+                riskIndexList.add(new Entry(1, 1));
+                insulinList.add(new Entry(2 , 2));
+                CHOList.add(new Entry(3 , 3));
+                BGList.add(new Entry(4 , 4));
             }
           catch (Exception e){
               Log.d("err", "onCreateView: error is      "+e);
@@ -93,10 +86,10 @@ public class LevelFragment extends Fragment {
 
         }
 
-        Log.d("risk", "onCreateView: "+riskIndexList.toString());
-        Log.d("insulin", "onCreateView: "+insulinList.toString());
-        Log.d("cho", "onCreateView: "+CHOList.toString());
-        Log.d("bg", "onCreateView: "+BGList.toString());
+//        Log.d("risk", "onCreateView: "+riskIndexList.toString());
+//        Log.d("insulin", "onCreateView: "+insulinList.toString());
+//        Log.d("cho", "onCreateView: "+CHOList.toString());
+//        Log.d("bg", "onCreateView: "+BGList.toString());
 
         LineDataSet riskindexDataset = new LineDataSet(riskIndexList,"risk index");
         LineDataSet insulinDataSet = new LineDataSet(insulinList,"insulin");
@@ -106,10 +99,10 @@ public class LevelFragment extends Fragment {
 
         Log.d(TAG, "onCreateView: -------------------------------------------------------------------------------------------------------------------");
 
-        Log.d("risk", "onCreateView: "+riskindexDataset.toString());
-        Log.d("insulin", "onCreateView: "+insulinDataSet.toString());
-        Log.d("cho", "onCreateView: "+CHO_dataset.toString());
-        Log.d("bg", "onCreateView: "+BG_dataset.toString());
+//        Log.d("risk", "onCreateView: "+riskindexDataset.toString());
+//        Log.d("insulin", "onCreateView: "+insulinDataSet.toString());
+//        Log.d("cho", "onCreateView: "+CHO_dataset.toString());
+//        Log.d("bg", "onCreateView: "+BG_dataset.toString());
 
         Log.d(TAG, "onCreateView: ************************************************************************************************8");
 

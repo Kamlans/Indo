@@ -6,9 +6,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.indo.chats.ChatFragment;
-import com.example.indo.home.HomeFragment;
-import com.example.indo.levels.LevelFragment;
+import com.example.indo.sos.SosFragment;
+import com.example.indo.userInput.UserInputFragment;
+import com.example.indo.currentStatus.CurrentstautsFragment;
+import com.example.indo.history.HistoryFragment;
 
 public class FragmentAdapter extends FragmentStateAdapter {
     public FragmentAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
@@ -21,15 +22,18 @@ public class FragmentAdapter extends FragmentStateAdapter {
 
         switch (position){
             case 0:
-                return  new LevelFragment();
+                return  new HistoryFragment();
             case 2:
-                return  new ChatFragment();
+                return  new UserInputFragment();
+
+            case 3:
+                return  new SosFragment();
         }
-        return new HomeFragment();
+        return new CurrentstautsFragment();
     }
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 4;
     }
 }
