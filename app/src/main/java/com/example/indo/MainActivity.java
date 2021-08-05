@@ -4,8 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -15,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
+    private SharedPreferences sharedPreferences;
+    private static final String TAG = "kamlans2";
 
 
     @Override
@@ -24,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout = findViewById(R.id.tabLayout);
         viewPager2 = findViewById(R.id.viewPager2);
+
+        sharedPreferences = getSharedPreferences("indo" , Context.MODE_PRIVATE);
+        Log.d(TAG, "onCreate: token ::"+  sharedPreferences.contains("token"));
+        Log.d(TAG, "onCreate: token value is ::::::"+sharedPreferences.getString("token", "def value"));
 
         viewPager2.setAdapter( new FragmentAdapter( getSupportFragmentManager() , getLifecycle()));
 
@@ -71,7 +80,10 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.AboutUsMenuItem:
                 startActivity( new Intent(getApplicationContext() , AboutUsActivity.class));
+                break;
 
+            case R.id.LogutBtnInMenuitem:
+                startActivity(new Intent(getApplicationContext() , LoginActivity.class));
         }
         return true;
     }

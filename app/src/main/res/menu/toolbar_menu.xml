@@ -5,4 +5,7 @@
         android:title="About Us"
         android:id="@+id/AboutUsMenuItem"/>
 
+    <item
+        android:title="Logut"
+        android:id="@+id/LogutBtnInMenuitem"/>
 </menu>
