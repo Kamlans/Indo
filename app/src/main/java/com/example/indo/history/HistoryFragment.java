@@ -1,5 +1,7 @@
 package com.example.indo.history;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,22 +10,41 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.indo.MainActivity;
 import com.example.indo.R;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class HistoryFragment extends Fragment {
 
+    private RequestQueue requestQueue;
+    private String token , email;
     private static final String TAG = "kamlans" ;
     private LineChart riskIndex, insulin , CHO , BG;
+    private SharedPreferences sharedPreferences;
     List<Entry> insulinList = new ArrayList<>();
     List<Entry> riskIndexList= new ArrayList<>();
     List<Entry> CHOList = new ArrayList<>();
@@ -42,6 +63,16 @@ public class HistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_history, container, false);
+
+        sharedPreferences = getContext().getSharedPreferences("indo" , Context.MODE_PRIVATE);
+        token = sharedPreferences.getString("token", "def value");
+        email = sharedPreferences.getString("email", "def value");
+
+        try {
+            getValue("http://34.123.33.199/api/report/report/list");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         riskIndex = view.findViewById(R.id.riskIndex_graph);
         insulin = view.findViewById(R.id.insulin_graph);
@@ -86,10 +117,12 @@ public class HistoryFragment extends Fragment {
 
         }
 
-//        Log.d("risk", "onCreateView: "+riskIndexList.toString());
-//        Log.d("insulin", "onCreateView: "+insulinList.toString());
-//        Log.d("cho", "onCreateView: "+CHOList.toString());
-//        Log.d("bg", "onCreateView: "+BGList.toString());
+
+
+
+
+
+
 
         LineDataSet riskindexDataset = new LineDataSet(riskIndexList,"risk index");
         LineDataSet insulinDataSet = new LineDataSet(insulinList,"insulin");
@@ -97,14 +130,7 @@ public class HistoryFragment extends Fragment {
         LineDataSet BG_dataset = new LineDataSet(BGList,"BG");
 
 
-        Log.d(TAG, "onCreateView: -------------------------------------------------------------------------------------------------------------------");
 
-//        Log.d("risk", "onCreateView: "+riskindexDataset.toString());
-//        Log.d("insulin", "onCreateView: "+insulinDataSet.toString());
-//        Log.d("cho", "onCreateView: "+CHO_dataset.toString());
-//        Log.d("bg", "onCreateView: "+BG_dataset.toString());
-
-        Log.d(TAG, "onCreateView: ************************************************************************************************8");
 
         insulinDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
         riskindexDataset.setColors(ColorTemplate.JOYFUL_COLORS);
@@ -128,6 +154,89 @@ public class HistoryFragment extends Fragment {
         }
 
         return view;
+
+    }
+
+    private void getValue(String url) throws JSONException {
+
+
+        requestQueue = Volley.newRequestQueue(getContext());
+
+        Map<String  , String > parameters = new HashMap<>();
+        parameters.put("email","kamlans28@gmail.com");
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("email" , "kamlans28@gmail.com");
+       // Log.d(TAG, "getValue: "+jsonObject.toString());
+
+
+        JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.POST , url , jsonObject ,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+
+                       // Log.d(TAG, "onResponse: "+response.toString());
+                        Toast.makeText(getContext() , response.toString() , Toast.LENGTH_SHORT).show();
+
+                        JSONArray  jsonArray = new JSONArray();
+                        try {
+                            jsonArray = response.getJSONArray("reports");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        for ( int i = 0 ; i <= jsonArray.length() ; i++){
+
+
+                            try {
+
+                                JSONObject individualValue = jsonArray.getJSONObject(i);
+                               // Log.d(TAG, "onResponse: jsonobject    :"+individualValue.toString());
+                                Log.d(TAG, "onResponse: -----------------------------------------------------------------------------------------------------------------");
+                                Log.d(TAG, "glucose_level: "+individualValue.getString("glucose_level"));
+                                Log.d(TAG, "cho_level: "+individualValue.getString("cho_level"));
+                                Log.d(TAG, "insuline_level: "+individualValue.getString("insuline_level"));
+                                Log.d(TAG, "insuline_dose_time: "+individualValue.getString("insuline_dose_time"));
+                                Log.d(TAG, "date_time: "+individualValue.getString("date_time"));
+                                Log.d(TAG, "insuline_dose_time: "+individualValue.getString("insuline_dose_time"));
+                                Log.d(TAG, "physical_activity_level: "+individualValue.getString("physical_activity_level"));
+                                Log.d(TAG, "patient: "+individualValue.getString("patient"));
+                                Log.d(TAG, "onResponse: -----------------------------------------------------------------------------------------------------------------");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+
+                        }
+
+
+                    }
+
+
+                } , new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "onErrorResponse: "+error);
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<String, String>();
+
+                params.put("Authorization" , "Bearer "+token);
+                params.put("Content-Type" , "application/json");
+                params.put("charset" , "UTF-8");
+                Log.d(TAG, "getHeaders: "+params.toString());
+                return  params;
+            }
+
+
+
+
+        };
+
+        requestQueue.getCache().clear();
+        requestQueue.add(objectRequest);
 
     }
 }
